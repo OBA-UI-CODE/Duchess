@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { DuchessMark } from "@/components/Icons";
 
 export default function Home() {
   return (
@@ -25,7 +24,6 @@ export default function Home() {
           <span className="gateway-enter">Enter the collection <ArrowUpRight aria-hidden="true" /></span>
         </span>
       </Link>
-      <div className="gateway-brand" aria-hidden="true"><DuchessMark /><span>Duchess</span></div>
     </main>
   );
 }
