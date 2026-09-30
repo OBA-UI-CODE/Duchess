@@ -16,10 +16,10 @@ const content = {
     storyTitle: "Find the texture that feels like you.",
     storyBody: "From everyday units to statement lengths, our collection makes it easier to compare textures, lengths and finishes before you choose.",
     products: [
-      { name: "The Amara Body Wave", category: "Premium wig · 24 inch", price: "₦185,000", imageClass: "wig-one", badge: "Bestseller" },
-      { name: "Silky Straight Bundle", category: "Human hair · 20 inch", price: "₦68,500", imageClass: "wig-two" },
-      { name: "The Zuri Closure", category: "HD lace · Natural black", price: "₦42,000", imageClass: "wig-one", badge: "New" },
-      { name: "Soft Curl Attachment", category: "Lightweight fibre · 24 inch", price: "₦16,500", imageClass: "wig-two" },
+      { name: "The Amara Body Wave", category: "Premium wig · 24 inch", price: "₦185,000", imageClass: "wig-one", image: "/images/product-body-wave.png", badge: "Bestseller" },
+      { name: "Silky Straight Bundle", category: "Human hair · 20 inch", price: "₦68,500", imageClass: "wig-two", image: "/images/product-straight-bundles.png" },
+      { name: "The Zuri Closure", category: "HD lace · Natural black", price: "₦42,000", imageClass: "wig-one", image: "/images/product-straight-bundles.png", badge: "New" },
+      { name: "Soft Curl Attachment", category: "Lightweight fibre · 24 inch", price: "₦16,500", imageClass: "wig-two", image: "/images/product-body-wave.png" },
     ],
   },
   cosmetics: {
@@ -30,10 +30,10 @@ const content = {
     storyTitle: "Know what your hair actually needs.",
     storyBody: "Duchess pairs carefully selected formulas with clear guidance, helping you build a routine around your texture, condition and goals.",
     products: [
-      { name: "Nourish Growth Oil", category: "Hair treatment · 100ml", price: "₦12,500", imageClass: "care-one", badge: "Bestseller" },
-      { name: "Repair & Restore Mask", category: "Deep conditioner · 300ml", price: "₦18,000", imageClass: "care-two" },
-      { name: "Silk Hold Edge Cream", category: "Styling care · 120ml", price: "₦8,500", imageClass: "care-two", badge: "New" },
-      { name: "Featherlight Lash Set", category: "Reusable lashes · 3 pairs", price: "₦9,000", imageClass: "care-one" },
+      { name: "Nourish Growth Oil", category: "Hair treatment · 100ml", price: "₦12,500", imageClass: "care-one", image: "/images/product-hair-care.png", badge: "Bestseller" },
+      { name: "Repair & Restore Mask", category: "Deep conditioner · 300ml", price: "₦18,000", imageClass: "care-two", image: "/images/product-hair-care.png" },
+      { name: "Silk Hold Edge Cream", category: "Styling care · 120ml", price: "₦8,500", imageClass: "care-two", image: "/images/product-hair-care.png", badge: "New" },
+      { name: "Featherlight Lash Set", category: "Reusable lashes · 3 pairs", price: "₦9,000", imageClass: "care-one", image: "/images/product-lashes.png" },
     ],
   },
 } as const;

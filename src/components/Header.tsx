@@ -37,7 +37,7 @@ export function Header({ department }: { department: "hair" | "cosmetics" }) {
         </nav>
         <div className="header-actions">
           <button className="search-button" aria-label="Search products"><Search aria-hidden="true" /><span>Search</span></button>
-          <Link className="icon-button tablet-up" href="#account" aria-label="Your account"><UserRound aria-hidden="true" /></Link>
+          <Link className="icon-button tablet-up" href="/login" aria-label="Sign in to your account"><UserRound aria-hidden="true" /></Link>
           <Link className="bag-button" href="#cart" aria-label="Shopping bag, 0 items"><ShoppingBag aria-hidden="true" /><span>0</span></Link>
         </div>
       </header>
@@ -49,7 +49,7 @@ export function Header({ department }: { department: "hair" | "cosmetics" }) {
         <nav aria-label="Mobile navigation">
           {links.map(([label, href]) => <Link key={href} href={href} onClick={() => setOpen(false)}>{label}</Link>)}
         </nav>
-        <Link className="menu-account" href="#account" onClick={() => setOpen(false)}><UserRound /> Sign in or create account</Link>
+        <Link className="menu-account" href="/login" onClick={() => setOpen(false)}><UserRound /> Sign in or create account</Link>
       </div>
     </>
   );
