@@ -5,13 +5,13 @@ import { Menu, Search, ShoppingBag, UserRound, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const links = [
-  ["Hair", "#hair"],
-  ["Cosmetics", "#cosmetics"],
-  ["New arrivals", "#new"],
+  ["Hair & Accessories", "/hair"],
+  ["Hair Care & Cosmetics", "/cosmetics"],
+  ["New arrivals", "#shop"],
   ["Our story", "#story"],
 ] as const;
 
-export function Header() {
+export function Header({ department }: { department: "hair" | "cosmetics" }) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -31,9 +31,9 @@ export function Header() {
         <button className="icon-button mobile-only" onClick={() => setOpen(true)} aria-label="Open menu">
           <Menu aria-hidden="true" />
         </button>
-        <Link className="wordmark" href="/" aria-label="Duchess home">Duchess</Link>
+        <Link className="wordmark" href="/" aria-label="Return to the Duchess department selection">Duchess</Link>
         <nav className="desktop-nav" aria-label="Main navigation">
-          {links.map(([label, href]) => <Link key={href} href={href}>{label}</Link>)}
+          {links.map(([label, href]) => <Link key={href} href={href} aria-current={href === `/${department}` ? "page" : undefined}>{label}</Link>)}
         </nav>
         <div className="header-actions">
           <button className="search-button" aria-label="Search products"><Search aria-hidden="true" /><span>Search</span></button>

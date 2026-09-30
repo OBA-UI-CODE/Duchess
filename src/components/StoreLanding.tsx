@@ -1,0 +1,82 @@
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight, Headphones, PackageCheck, ShieldCheck, Sparkles } from "lucide-react";
+import { Header } from "@/components/Header";
+import { DuchessMark } from "@/components/Icons";
+import { ProductCard } from "@/components/ProductCard";
+
+type Department = "hair" | "cosmetics";
+
+const content = {
+  hair: {
+    eyebrow: "Hair & Accessories", title: "Wear your crown, your way.",
+    body: "Premium wigs, bundles and finishing pieces selected for natural movement, effortless styling and unmistakable confidence.",
+    image: "/images/duchess-hair-hero.png", alt: "Model wearing a long dark body-wave wig",
+    edit: "The signature hair edit", editTitle: "Made to move. Chosen to last.",
+    storyTitle: "Find the texture that feels like you.",
+    storyBody: "From everyday units to statement lengths, our collection makes it easier to compare textures, lengths and finishes before you choose.",
+    products: [
+      { name: "The Amara Body Wave", category: "Premium wig · 24 inch", price: "₦185,000", imageClass: "wig-one", badge: "Bestseller" },
+      { name: "Silky Straight Bundle", category: "Human hair · 20 inch", price: "₦68,500", imageClass: "wig-two" },
+      { name: "The Zuri Closure", category: "HD lace · Natural black", price: "₦42,000", imageClass: "wig-one", badge: "New" },
+      { name: "Soft Curl Attachment", category: "Lightweight fibre · 24 inch", price: "₦16,500", imageClass: "wig-two" },
+    ],
+  },
+  cosmetics: {
+    eyebrow: "Hair Care & Cosmetics", title: "Care for every version of your crown.",
+    body: "Growth oils, nourishing treatments, lashes and beauty essentials made to support healthy routines and everyday confidence.",
+    image: "/images/duchess-cosmetics-hero.png", alt: "Hair creams, growth oil and cosmetics arranged on warm stone plinths",
+    edit: "The daily ritual edit", editTitle: "Good care, beautifully simple.",
+    storyTitle: "Know what your hair actually needs.",
+    storyBody: "Duchess pairs carefully selected formulas with clear guidance, helping you build a routine around your texture, condition and goals.",
+    products: [
+      { name: "Nourish Growth Oil", category: "Hair treatment · 100ml", price: "₦12,500", imageClass: "care-one", badge: "Bestseller" },
+      { name: "Repair & Restore Mask", category: "Deep conditioner · 300ml", price: "₦18,000", imageClass: "care-two" },
+      { name: "Silk Hold Edge Cream", category: "Styling care · 120ml", price: "₦8,500", imageClass: "care-two", badge: "New" },
+      { name: "Featherlight Lash Set", category: "Reusable lashes · 3 pairs", price: "₦9,000", imageClass: "care-one" },
+    ],
+  },
+} as const;
+
+export function StoreLanding({ department }: { department: Department }) {
+  const page = content[department];
+  return (
+    <main>
+      <Header department={department} />
+      <section className={`department-hero department-${department}`} aria-labelledby="department-title">
+        <Image src={page.image} alt={page.alt} fill priority sizes="100vw" />
+        <div className="department-shade" />
+        <div className="department-hero-copy">
+          <p className="hero-kicker">{page.eyebrow}</p><h1 id="department-title">{page.title}</h1><p>{page.body}</p>
+          <Link className="button button-light" href="#shop">Shop the collection <ArrowRight /></Link>
+        </div>
+        <p className="hero-index">Duchess / {department === "hair" ? "01" : "02"}</p>
+      </section>
+      <section className="trust-strip" aria-label="Shopping benefits">
+        <div><PackageCheck /><span><strong>Nationwide delivery</strong>Carefully packed, wherever you are</span></div>
+        <div><ShieldCheck /><span><strong>Secure payments</strong>Protected checkout with Paystack</span></div>
+        <div><Headphones /><span><strong>Beauty support</strong>Real help before and after you buy</span></div>
+      </section>
+      <section id="shop" className="section products-section">
+        <div className="section-heading"><div><p className="eyebrow purple">{page.edit}</p><h2>{page.editTitle}</h2></div><Link href="#catalogue">View all products <ArrowRight /></Link></div>
+        <div className="product-grid">{page.products.map((product) => <ProductCard key={product.name} product={product} />)}</div>
+      </section>
+      <section className="care-story" id="story">
+        <div className={`care-art ${department === "hair" ? "hair-art" : ""}`} aria-hidden="true"><div className="arch arch-one" /><div className="arch arch-two" /><div className="bottle tall" /><div className="bottle short" /><Sparkles className="sparkles" /></div>
+        <div className="care-copy"><p className="eyebrow purple">Duchess guidance</p><h2>{page.storyTitle}</h2><p>{page.storyBody}</p><Link className="text-link" href="#journal">Explore the journal <ArrowRight /></Link></div>
+      </section>
+      <section className="newsletter">
+        <DuchessMark className="newsletter-mark" /><p className="eyebrow">The private list</p><h2>New drops, care notes<br />and a little Duchess treatment.</h2>
+        <form><label className="sr-only" htmlFor={`${department}-email`}>Email address</label><input id={`${department}-email`} type="email" placeholder="Your email address" /><button type="submit">Join us <ArrowRight /></button></form>
+        <small>By subscribing, you agree to receive Duchess updates. Unsubscribe anytime.</small>
+      </section>
+      <footer>
+        <div className="footer-brand"><span className="wordmark light">Duchess</span><p>Hair, care and beauty for every expression of you.</p></div>
+        <div><h3>Departments</h3><Link href="/hair">Hair &amp; Accessories</Link><Link href="/cosmetics">Hair Care &amp; Cosmetics</Link><Link href="/">Choose a department</Link></div>
+        <div><h3>Help</h3><Link href="#delivery">Delivery &amp; returns</Link><Link href="#contact">Contact us</Link><Link href="#faq">FAQs</Link></div>
+        <div><h3>Follow</h3><Link href="#instagram">Instagram</Link><Link href="#tiktok">TikTok</Link><Link href="#whatsapp">WhatsApp</Link></div>
+        <p className="copyright">© 2026 Duchess. All rights reserved.</p>
+      </footer>
+    </main>
+  );
+}
