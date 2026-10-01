@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Chrome, LoaderCircle } from "lucide-react";
+import { LoaderCircle } from "lucide-react";
 import { FormEvent, useState } from "react";
 import { createClient, isSupabaseConfigured } from "@/lib/supabase/client";
 
@@ -43,7 +44,10 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
       <p className="eyebrow purple">{isLogin ? "Welcome back" : "Join the private list"}</p>
       <h1>{isLogin ? "Sign in to your account." : "Create your Duchess account."}</h1>
       <p className="auth-intro">Save favourites, follow orders and enjoy a faster checkout.</p>
-      <button className="google-button" type="button" onClick={continueWithGoogle} disabled={loading}><Chrome /> Continue with Google</button>
+      <button className="google-button" type="button" onClick={continueWithGoogle} disabled={loading}>
+        <Image unoptimized src="https://developers.google.com/static/identity/images/g-logo.png" alt="" width={20} height={20} />
+        Continue with Google
+      </button>
       <div className="auth-divider"><span>or continue with email</span></div>
       <form className="auth-form" onSubmit={submit}>
         <label htmlFor="email">Email address</label><input id="email" name="email" type="email" autoComplete="email" required placeholder="you@example.com" />

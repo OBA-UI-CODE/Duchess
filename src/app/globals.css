@@ -168,7 +168,7 @@ footer a:hover { color: white; }
 .auth-intro { margin: 18px 0 30px; color: var(--muted); line-height: 1.65; }
 .google-button, .auth-submit { width: 100%; min-height: 52px; border-radius: 10px; display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: 700; cursor: pointer; }
 .google-button { border: 1px solid #cfc7d0; background: white; color: var(--ink); }
-.google-button svg { width: 19px; }
+.google-button img { width: 20px; height: 20px; flex: none; }
 .google-button:hover { background: var(--purple-50); border-color: var(--purple-700); }
 .auth-divider { display: flex; align-items: center; gap: 12px; margin: 26px 0; color: var(--muted); font-size: 12px; }
 .auth-divider::before, .auth-divider::after { content: ''; height: 1px; flex: 1; background: var(--line); }
