@@ -63,7 +63,8 @@ export async function StoreLanding({ department }: { department: Department }) {
       </section>
       <section className="section landing-collections" aria-labelledby="landing-collections-title">
         <div className="section-heading"><div><p className="eyebrow purple">Find your way in</p><h2 id="landing-collections-title">Shop by category.</h2></div><Link href={`/collections/${department}`}>View all categories <ArrowRight /></Link></div>
-        <div className="landing-collection-grid">{collections.map((collection) => <Link className="landing-collection-card" href={`/collections/${collection.slug}`} key={collection.slug}><span className="landing-collection-image"><Image src={collection.image} alt="" fill sizes="(max-width: 600px) 100vw, (max-width: 1000px) 50vw, 33vw" /></span><span className="landing-collection-label"><strong>{collection.title}</strong><ArrowRight aria-hidden="true" /></span></Link>)}</div>
+        <div className="landing-collection-grid">{collections.map((collection, index) => <Link className="landing-collection-card" href={`/collections/${collection.slug}`} key={collection.slug}><span className="landing-collection-image"><Image src={collection.image} alt="" fill sizes="(max-width: 599px) 100vw, (max-width: 1099px) 50vw, 33vw" /></span><span className="landing-collection-number" aria-hidden="true">0{index + 1} / 0{collections.length}</span><span className="landing-collection-label"><span><strong>{collection.title}</strong><span className="landing-collection-description">{collection.description}</span></span><span className="landing-collection-arrow"><ArrowRight aria-hidden="true" /></span></span></Link>)}</div>
+        <Link className="landing-more-link landing-category-more" href={`/collections/${department}`}>View all categories <ArrowRight aria-hidden="true" /></Link>
       </section>
       <section id="shop" className="section products-section">
         <div className="section-heading"><div><p className="eyebrow purple">{page.edit}</p><h2>{page.editTitle}</h2></div><Link href={`/collections/${department}`}>View all products <ArrowRight /></Link></div>
@@ -71,7 +72,9 @@ export async function StoreLanding({ department }: { department: Department }) {
         <Link className="landing-more-link" href={`/collections/${department}`}>View all {department === "hair" ? "hair" : "care & cosmetics"} products <ArrowRight aria-hidden="true" /></Link>
       </section>
       <section className="care-story" id="story">
-        <div className={`care-art ${department === "hair" ? "hair-art" : ""}`} aria-hidden="true"><div className="arch arch-one" /><div className="arch arch-two" /><div className="bottle tall" /><div className="bottle short" /><Sparkles className="sparkles" /></div>
+        {department === "hair"
+          ? <div className="care-art hair-story-photo"><Image src="/images/story-hair-portrait.jpg" alt="Woman with natural curly hair smiling" fill loading="eager" sizes="(max-width: 599px) 100vw, (max-width: 1099px) 50vw, 55vw" /><span className="story-photo-credit">Photo: Vitaly Gariev / Unsplash</span></div>
+          : <div className="care-art" aria-hidden="true"><div className="arch arch-one" /><div className="arch arch-two" /><div className="bottle tall" /><div className="bottle short" /><Sparkles className="sparkles" /></div>}
         <div className="care-copy"><p className="eyebrow purple">Duchess guidance</p><h2>{page.storyTitle}</h2><p>{page.storyBody}</p><Link className="text-link" href="/journal">Explore the journal <ArrowRight /></Link></div>
       </section>
       <section className="newsletter">
