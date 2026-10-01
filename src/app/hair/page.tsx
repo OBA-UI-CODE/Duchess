@@ -3,6 +3,6 @@ import { StoreLanding } from "@/components/StoreLanding";
 
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = { title: "Hair & Accessories | Duchess", description: "Shop Duchess wigs, bundles, attachments and premium hair accessories." };
+export const metadata: Metadata = { title: "Hair Accessories | Duchess", description: "Shop Duchess wigs, bundles, attachments and premium hair accessories." };
 
 export default function HairPage() { return <StoreLanding department="hair" />; }

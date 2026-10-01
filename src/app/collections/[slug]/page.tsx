@@ -31,7 +31,7 @@ export default async function CollectionPage({ params }: { params: Promise<{ slu
   const collection = collections.find((item) => item.slug === slug);
   const departmentCollections = getDepartmentCollections(department);
   const visible = collection ? getCollectionProducts(products, collection) : products;
-  const title = collection?.title ?? (department === "hair" ? "Explore hair & accessories" : "Explore care & cosmetics");
+  const title = collection?.title ?? (department === "hair" ? "Explore hair accessories" : "Explore care & cosmetics");
   const description = collection?.description ?? (department === "hair"
     ? "Choose women's wigs, men's hair systems or styling pieces, then find the texture and fit that feels right."
     : "Discover hair routines, men's scalp care and finishing beauty essentials.");
@@ -45,7 +45,7 @@ export default async function CollectionPage({ params }: { params: Promise<{ slu
         {collection ? <><Link href={`/collections/${department}`}>Collections</Link><span aria-hidden="true">/</span><span aria-current="page">{collection.title}</span></> : <span aria-current="page">Collections</span>}
       </nav>
       <header className="collection-intro">
-        <p className="eyebrow purple">{department === "hair" ? "Hair & accessories" : "Hair care & cosmetics"}</p>
+        <p className="eyebrow purple">{department === "hair" ? "Hair accessories" : "Hair care & cosmetics"}</p>
         <h1>{title}</h1>
         <p>{description}</p>
       </header>

@@ -11,7 +11,7 @@ type Department = "hair" | "cosmetics";
 
 const content = {
   hair: {
-    eyebrow: "Hair & Accessories", title: "Wear your crown, your way.",
+    eyebrow: "Hair Accessories", title: "Wear your crown, your way.",
     body: "Premium wigs, bundles and finishing pieces selected for natural movement, effortless styling and unmistakable confidence.",
     image: "/images/duchess-hair-hero.png", alt: "Model wearing a long dark body-wave wig",
     edit: "The signature hair edit", editTitle: "Made to move. Chosen to last.",
@@ -82,7 +82,7 @@ export async function StoreLanding({ department }: { department: Department }) {
       </section>
       <footer>
         <div className="footer-brand"><span className="wordmark light">Duchess</span><p>Hair, care and beauty for every expression of you.</p></div>
-        <div><h3>Departments</h3><Link href="/hair">Hair &amp; Accessories</Link><Link href="/cosmetics">Hair Care &amp; Cosmetics</Link><Link href="/">Choose a department</Link></div>
+        <div><h3>Departments</h3><Link href="/hair">Hair Accessories</Link><Link href="/cosmetics">Hair Care &amp; Cosmetics</Link><Link href="/">Choose a department</Link></div>
         <div><h3>Help</h3><Link href="/shipping-returns">Delivery &amp; returns</Link><Link href="mailto:hello@duchess.ng">Contact us</Link><Link href="/terms">Terms</Link></div>
         <div><h3>Follow</h3><Link href="#instagram">Instagram</Link><Link href="#tiktok">TikTok</Link><Link href="#whatsapp">WhatsApp</Link></div>
         <p className="copyright">© 2026 Duchess. All rights reserved.</p>
