@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Headphones, PackageCheck, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowRight, Headphones, PackageCheck, ShieldCheck } from "lucide-react";
 import { Header } from "@/components/Header";
 import { DuchessMark } from "@/components/Icons";
 import { ProductCard } from "@/components/ProductCard";
@@ -72,9 +72,7 @@ export async function StoreLanding({ department }: { department: Department }) {
         <Link className="landing-more-link" href={`/collections/${department}`}>View all {department === "hair" ? "hair" : "care & cosmetics"} products <ArrowRight aria-hidden="true" /></Link>
       </section>
       <section className="care-story" id="story">
-        {department === "hair"
-          ? <div className="care-art hair-story-photo"><Image src="/images/story-hair-portrait.jpg" alt="Woman with natural curly hair smiling" fill loading="eager" sizes="(max-width: 599px) 100vw, (max-width: 1099px) 50vw, 55vw" /></div>
-          : <div className="care-art" aria-hidden="true"><div className="arch arch-one" /><div className="arch arch-two" /><div className="bottle tall" /><div className="bottle short" /><Sparkles className="sparkles" /></div>}
+        <div className="care-art story-photo"><Image src={department === "hair" ? "/images/story-hair-portrait.jpg" : "/images/story-cosmetics-care.jpg"} alt={department === "hair" ? "Woman with natural curly hair smiling" : "Woman caring for her hair during a self-care routine"} fill loading="eager" sizes="(max-width: 599px) 100vw, (max-width: 1099px) 50vw, 55vw" /></div>
         <div className="care-copy"><p className="eyebrow purple">Duchess guidance</p><h2>{page.storyTitle}</h2><p>{page.storyBody}</p><Link className="text-link" href="/journal">Explore the journal <ArrowRight /></Link></div>
       </section>
       <section className="newsletter">
