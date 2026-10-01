@@ -8,7 +8,7 @@ ornamental.
 
 ## Product foundations
 
-- The storefront has two primary departments: **Hair Accessories** and
+- The storefront has two primary departments: **Hair | Accessories** and
   **Hair Care & Cosmetics**. Marketing may shorten these to **Hair** and
   **Cosmetics**.
 - The homepage begins with a two-path Hair/Cosmetics experience inspired by

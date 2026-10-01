@@ -6,12 +6,12 @@ export default function Home() {
   return (
     <main className="gateway-shell">
       <h1 className="sr-only">Choose a Duchess shopping department</h1>
-      <Link className="gateway-panel gateway-hair" href="/hair" aria-label="Enter Hair Accessories">
+      <Link className="gateway-panel gateway-hair" href="/hair" aria-label="Enter Hair | Accessories">
         <Image src="/images/duchess-hair-hero.png" alt="Model wearing long, dark body-wave hair" fill priority sizes="(min-width: 600px) 50vw, 100vw" />
         <span className="gateway-overlay" />
         <span className="gateway-copy">
           <span className="gateway-kicker">Duchess collection 01</span>
-          <span className="gateway-title">Hair<br />Accessories</span>
+          <span className="gateway-title">Hair |<br />Accessories</span>
           <span className="gateway-enter">Enter the collection <ArrowUpRight aria-hidden="true" /></span>
         </span>
       </Link>

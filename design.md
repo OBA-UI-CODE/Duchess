@@ -4,7 +4,7 @@ This is the quick reference for Duchess's current storefront. The detailed desig
 
 ## Product experience
 
-Duchess is a beauty shop with two entry paths: **Hair Accessories** and **Hair Care & Cosmetics**. The first screen asks shoppers which collection to enter. Department pages then provide an editorial introduction, product selection, care guidance and a route into the full catalogue. Search, account, saved products, cart and checkout are shared across both departments. Product listings should make it clear which pieces and care products suit different customers without assigning products to a gender by default.
+Duchess is a beauty shop with two entry paths: **Hair | Accessories** and **Hair Care & Cosmetics**. The first screen asks shoppers which collection to enter. Department pages then provide an editorial introduction, product selection, care guidance and a route into the full catalogue. Search, account, saved products, cart and checkout are shared across both departments. Product listings should make it clear which pieces and care products suit different customers without assigning products to a gender by default.
 
 Each department introduces three clear collections. Hair has **Women's wigs**, **Men's wigs & hair systems**, and **Bundles & attachments**. Care & Cosmetics has **Hair care & treatments**, **Men's hair care**, and **Lashes & beauty**. Every collection hub also offers **All products** so a shopper can skip categories. New arrivals show products explicitly marked `New`.
 

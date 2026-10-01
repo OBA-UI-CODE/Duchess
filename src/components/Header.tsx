@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useCommerce } from "@/components/CommerceProvider";
 
 const links = [
-  ["Hair Accessories", "/hair"],
+  ["Hair | Accessories", "/hair"],
   ["Hair Care & Cosmetics", "/cosmetics"],
   ["New arrivals", "/new-arrivals"],
   ["Our story", "/hair#story"],
