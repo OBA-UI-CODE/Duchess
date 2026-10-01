@@ -8,5 +8,6 @@ export default async function AccountPage() {
   const supabase = await createClient();
   const { data } = await supabase.auth.getClaims();
   if (!data?.claims) redirect("/login");
-  return <main className="account-shell"><Link className="auth-wordmark" href="/">Duchess</Link><AccountDashboard email={String(data.claims.email ?? "your account")} /></main>;
+  const { data: orders } = await supabase.from("orders").select("id,order_number,status,total_kobo,created_at").order("created_at", { ascending: false }).limit(5);
+  return <main className="account-shell"><Link className="auth-wordmark" href="/">Duchess</Link><AccountDashboard email={String(data.claims.email ?? "your account")} orders={orders ?? []} /></main>;
 }
