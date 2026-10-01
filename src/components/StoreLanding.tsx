@@ -73,7 +73,7 @@ export async function StoreLanding({ department }: { department: Department }) {
       </section>
       <section className="care-story" id="story">
         {department === "hair"
-          ? <div className="care-art hair-story-photo"><Image src="/images/story-hair-portrait.jpg" alt="Woman with natural curly hair smiling" fill loading="eager" sizes="(max-width: 599px) 100vw, (max-width: 1099px) 50vw, 55vw" /><span className="story-photo-credit">Photo: Vitaly Gariev / Unsplash</span></div>
+          ? <div className="care-art hair-story-photo"><Image src="/images/story-hair-portrait.jpg" alt="Woman with natural curly hair smiling" fill loading="eager" sizes="(max-width: 599px) 100vw, (max-width: 1099px) 50vw, 55vw" /></div>
           : <div className="care-art" aria-hidden="true"><div className="arch arch-one" /><div className="arch arch-two" /><div className="bottle tall" /><div className="bottle short" /><Sparkles className="sparkles" /></div>}
         <div className="care-copy"><p className="eyebrow purple">Duchess guidance</p><h2>{page.storyTitle}</h2><p>{page.storyBody}</p><Link className="text-link" href="/journal">Explore the journal <ArrowRight /></Link></div>
       </section>
