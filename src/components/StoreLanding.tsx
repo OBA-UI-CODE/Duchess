@@ -5,6 +5,7 @@ import { Header } from "@/components/Header";
 import { DuchessMark } from "@/components/Icons";
 import { ProductCard } from "@/components/ProductCard";
 import { getProducts } from "@/lib/products";
+import { getDepartmentCollections } from "@/lib/collections";
 
 type Department = "hair" | "cosmetics";
 
@@ -42,6 +43,7 @@ const content = {
 export async function StoreLanding({ department }: { department: Department }) {
   const page = content[department];
   const products = await getProducts(department);
+  const collections = getDepartmentCollections(department);
   return (
     <main>
       <Header department={department} />
@@ -56,16 +58,21 @@ export async function StoreLanding({ department }: { department: Department }) {
       </section>
       <section className="trust-strip" aria-label="Shopping benefits">
         <div><PackageCheck /><span><strong>Nationwide delivery</strong>Carefully packed, wherever you are</span></div>
-        <div><ShieldCheck /><span><strong>Secure payments</strong>Protected checkout with Paystack</span></div>
+        <div><ShieldCheck /><span><strong>Thoughtful checkout</strong>Clear pricing before you place an order</span></div>
         <div><Headphones /><span><strong>Beauty support</strong>Real help before and after you buy</span></div>
       </section>
+      <section className="section landing-collections" aria-labelledby="landing-collections-title">
+        <div className="section-heading"><div><p className="eyebrow purple">Find your way in</p><h2 id="landing-collections-title">Shop by category.</h2></div><Link href={`/collections/${department}`}>View all categories <ArrowRight /></Link></div>
+        <div className="landing-collection-grid">{collections.map((collection) => <Link className="landing-collection-card" href={`/collections/${collection.slug}`} key={collection.slug}><span className="landing-collection-image"><Image src={collection.image} alt="" fill sizes="(max-width: 600px) 100vw, (max-width: 1000px) 50vw, 33vw" /></span><span className="landing-collection-label"><strong>{collection.title}</strong><ArrowRight aria-hidden="true" /></span></Link>)}</div>
+      </section>
       <section id="shop" className="section products-section">
-        <div className="section-heading"><div><p className="eyebrow purple">{page.edit}</p><h2>{page.editTitle}</h2></div><Link href="#catalogue">View all products <ArrowRight /></Link></div>
-        <div className="product-grid">{products.map((product) => <ProductCard key={product.id} product={product} />)}</div>
+        <div className="section-heading"><div><p className="eyebrow purple">{page.edit}</p><h2>{page.editTitle}</h2></div><Link href={`/collections/${department}`}>View all products <ArrowRight /></Link></div>
+        <div className="product-grid">{products.slice(0, 4).map((product) => <ProductCard key={product.id} product={product} />)}</div>
+        <Link className="landing-more-link" href={`/collections/${department}`}>View all {department === "hair" ? "hair" : "care & cosmetics"} products <ArrowRight aria-hidden="true" /></Link>
       </section>
       <section className="care-story" id="story">
         <div className={`care-art ${department === "hair" ? "hair-art" : ""}`} aria-hidden="true"><div className="arch arch-one" /><div className="arch arch-two" /><div className="bottle tall" /><div className="bottle short" /><Sparkles className="sparkles" /></div>
-        <div className="care-copy"><p className="eyebrow purple">Duchess guidance</p><h2>{page.storyTitle}</h2><p>{page.storyBody}</p><Link className="text-link" href="#journal">Explore the journal <ArrowRight /></Link></div>
+        <div className="care-copy"><p className="eyebrow purple">Duchess guidance</p><h2>{page.storyTitle}</h2><p>{page.storyBody}</p><Link className="text-link" href="/journal">Explore the journal <ArrowRight /></Link></div>
       </section>
       <section className="newsletter">
         <DuchessMark className="newsletter-mark" /><p className="eyebrow">The private list</p><h2>New drops, care notes<br />and a little Duchess treatment.</h2>

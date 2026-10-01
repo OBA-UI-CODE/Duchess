@@ -1,11 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Chrome, LoaderCircle } from "lucide-react";
 import { FormEvent, useState } from "react";
 import { createClient, isSupabaseConfigured } from "@/lib/supabase/client";
 
 export function AuthForm({ mode }: { mode: "login" | "signup" }) {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const isLogin = mode === "login";
@@ -30,7 +32,7 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
       ? await supabase.auth.signInWithPassword({ email, password })
       : await supabase.auth.signUp({ email, password, options: { emailRedirectTo: `${window.location.origin}/auth/callback?next=/account` } });
     if (result.error) setMessage(result.error.message);
-    else if (isLogin) window.location.assign("/account");
+    else if (isLogin) { router.replace("/account"); router.refresh(); }
     else setMessage("Check your inbox to confirm your Duchess account.");
     setLoading(false);
   }
