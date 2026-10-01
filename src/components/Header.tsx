@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Menu, Search, ShoppingBag, UserRound, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useCommerce } from "@/components/CommerceProvider";
 
 const links = [
   ["Hair & Accessories", "/hair"],
@@ -11,8 +12,9 @@ const links = [
   ["Our story", "#story"],
 ] as const;
 
-export function Header({ department }: { department: "hair" | "cosmetics" }) {
+export function Header({ department }: { department?: "hair" | "cosmetics" }) {
   const [open, setOpen] = useState(false);
+  const { cartCount } = useCommerce();
 
   useEffect(() => {
     const close = (event: KeyboardEvent) => event.key === "Escape" && setOpen(false);
@@ -36,9 +38,9 @@ export function Header({ department }: { department: "hair" | "cosmetics" }) {
           {links.map(([label, href]) => <Link key={href} href={href} aria-current={href === `/${department}` ? "page" : undefined}>{label}</Link>)}
         </nav>
         <div className="header-actions">
-          <button className="search-button" aria-label="Search products"><Search aria-hidden="true" /><span>Search</span></button>
+          <Link className="search-button" href="/shop" aria-label="Search products"><Search aria-hidden="true" /><span>Search</span></Link>
           <Link className="icon-button tablet-up" href="/login" aria-label="Sign in to your account"><UserRound aria-hidden="true" /></Link>
-          <Link className="bag-button" href="#cart" aria-label="Shopping bag, 0 items"><ShoppingBag aria-hidden="true" /><span>0</span></Link>
+          <Link className="bag-button" href="/cart" aria-label={`Shopping bag, ${cartCount} ${cartCount === 1 ? "item" : "items"}`}><ShoppingBag aria-hidden="true" />{cartCount > 0 && <span>{cartCount}</span>}</Link>
         </div>
       </header>
       <div className={`mobile-menu ${open ? "is-open" : ""}`} aria-hidden={!open}>

@@ -4,6 +4,7 @@ import { ArrowRight, Headphones, PackageCheck, ShieldCheck, Sparkles } from "luc
 import { Header } from "@/components/Header";
 import { DuchessMark } from "@/components/Icons";
 import { ProductCard } from "@/components/ProductCard";
+import { getProducts } from "@/lib/products";
 
 type Department = "hair" | "cosmetics";
 
@@ -38,8 +39,9 @@ const content = {
   },
 } as const;
 
-export function StoreLanding({ department }: { department: Department }) {
+export async function StoreLanding({ department }: { department: Department }) {
   const page = content[department];
+  const products = await getProducts(department);
   return (
     <main>
       <Header department={department} />
@@ -59,7 +61,7 @@ export function StoreLanding({ department }: { department: Department }) {
       </section>
       <section id="shop" className="section products-section">
         <div className="section-heading"><div><p className="eyebrow purple">{page.edit}</p><h2>{page.editTitle}</h2></div><Link href="#catalogue">View all products <ArrowRight /></Link></div>
-        <div className="product-grid">{page.products.map((product) => <ProductCard key={product.name} product={product} />)}</div>
+        <div className="product-grid">{products.map((product) => <ProductCard key={product.id} product={product} />)}</div>
       </section>
       <section className="care-story" id="story">
         <div className={`care-art ${department === "hair" ? "hair-art" : ""}`} aria-hidden="true"><div className="arch arch-one" /><div className="arch arch-two" /><div className="bottle tall" /><div className="bottle short" /><Sparkles className="sparkles" /></div>
@@ -73,7 +75,7 @@ export function StoreLanding({ department }: { department: Department }) {
       <footer>
         <div className="footer-brand"><span className="wordmark light">Duchess</span><p>Hair, care and beauty for every expression of you.</p></div>
         <div><h3>Departments</h3><Link href="/hair">Hair &amp; Accessories</Link><Link href="/cosmetics">Hair Care &amp; Cosmetics</Link><Link href="/">Choose a department</Link></div>
-        <div><h3>Help</h3><Link href="#delivery">Delivery &amp; returns</Link><Link href="#contact">Contact us</Link><Link href="#faq">FAQs</Link></div>
+        <div><h3>Help</h3><Link href="/shipping-returns">Delivery &amp; returns</Link><Link href="mailto:hello@duchess.ng">Contact us</Link><Link href="/terms">Terms</Link></div>
         <div><h3>Follow</h3><Link href="#instagram">Instagram</Link><Link href="#tiktok">TikTok</Link><Link href="#whatsapp">WhatsApp</Link></div>
         <p className="copyright">© 2026 Duchess. All rights reserved.</p>
       </footer>

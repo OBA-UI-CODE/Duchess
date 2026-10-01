@@ -46,6 +46,7 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
       <form className="auth-form" onSubmit={submit}>
         <label htmlFor="email">Email address</label><input id="email" name="email" type="email" autoComplete="email" required placeholder="you@example.com" />
         <label htmlFor="password">Password</label><input id="password" name="password" type="password" autoComplete={isLogin ? "current-password" : "new-password"} minLength={8} required placeholder="At least 8 characters" />
+        {isLogin && <Link className="forgot-link" href="/forgot-password">Forgot password?</Link>}
         <button className="auth-submit" disabled={loading}>{loading && <LoaderCircle className="spinner" />}{isLogin ? "Sign in" : "Create account"}</button>
       </form>
       {message && <p className="auth-message" role="status">{message}</p>}
