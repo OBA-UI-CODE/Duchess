@@ -21,10 +21,10 @@ export const collections: Collection[] = [
   {
     slug: "mens-hair",
     title: "Men's wigs & hair systems",
-    description: "Short textured and salt-and-pepper styles with realistic hairlines.",
+    description: "Textured, straight, wavy and salt-and-pepper hair systems with realistic hairlines.",
     department: "hair",
     image: "/images/product-mens-textured-hair-system.png",
-    productSlugs: ["kairo-textured-hair-system", "atlas-salt-pepper-system"],
+    productSlugs: ["kairo-textured-hair-system", "atlas-salt-pepper-system", "noah-deep-wave-system", "eli-straight-fade-system", "micah-brown-wave-system", "zion-coily-crop-system"],
   },
   {
     slug: "bundles-attachments",
@@ -45,10 +45,10 @@ export const collections: Collection[] = [
   {
     slug: "mens-hair-care",
     title: "Men's hair care",
-    description: "Straightforward cleansing and scalp care for hair and hair systems.",
+    description: "Cleansing, scalp care, styling and maintenance for hair and hair systems.",
     department: "cosmetics",
     image: "/images/product-mens-wash-duo.png",
-    productSlugs: ["mens-scalp-wash-duo", "mens-scalp-serum"],
+    productSlugs: ["mens-scalp-wash-duo", "mens-scalp-serum", "mens-daily-scalp-moisturiser", "mens-hair-system-cleanse-kit", "mens-curl-defining-cream", "mens-hair-beard-oil"],
   },
   {
     slug: "lashes-beauty",

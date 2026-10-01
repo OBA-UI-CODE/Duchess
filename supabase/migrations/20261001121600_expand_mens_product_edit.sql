@@ -1,0 +1,14 @@
+-- Expand each men's collection to six distinct catalogue items.
+-- Keep IDs stable so saved carts and wishlists retain their references.
+insert into public.products
+  (id, slug, name, department, category, description, price_kobo, image_url, badge, options, stock_quantity, sort_order)
+values
+  ('11111111-2222-4111-8111-111111111111', 'noah-deep-wave-system', 'Noah Deep Wave System', 'hair', 'Men''s hair system · Deep wave', 'A soft, defined wave pattern with a natural-looking lace hairline and easy everyday styling.', 10200000, '/images/product-mens-deep-wave.webp', 'New', '["Natural black", "Dark brown"]'::jsonb, 9, 17),
+  ('22222222-3333-4222-8222-222222222222', 'eli-straight-fade-system', 'Eli Straight Fade System', 'hair', 'Men''s hair system · Straight', 'A neat straight style designed for a close, polished cut and a discreet front hairline.', 9900000, '/images/product-mens-straight-fade.webp', 'New', '["Natural black", "Dark brown"]'::jsonb, 10, 18),
+  ('33333333-4444-4333-8333-333333333333', 'micah-brown-wave-system', 'Micah Brown Wave System', 'hair', 'Men''s hair system · Medium wave', 'A relaxed medium-length wave in warm brown, with natural movement and balanced volume.', 11200000, '/images/product-mens-brown-wave.webp', 'New', '["Dark brown", "Natural black"]'::jsonb, 7, 19),
+  ('44444444-5555-4444-8444-444444444444', 'zion-coily-crop-system', 'Zion Coily Crop System', 'hair', 'Men''s lace wig · Coily crop', 'A close-cropped coily texture with a realistic lace front for a clean, natural finish.', 9600000, '/images/product-mens-coily-crop.webp', 'New', '["Natural black"]'::jsonb, 8, 20),
+  ('55555555-6666-4555-8555-555555555555', 'mens-daily-scalp-moisturiser', 'Men''s Daily Scalp Moisturiser', 'cosmetics', 'Men''s hair care · Scalp moisturiser', 'A light daily moisturiser to keep the scalp feeling comfortable without a heavy finish.', 1250000, '/images/product-mens-scalp-moisturiser.webp', 'New', '[]'::jsonb, 18, 21),
+  ('66666666-7777-4666-8666-666666666666', 'mens-hair-system-cleanse-kit', 'Men''s Hair System Cleanse Kit', 'cosmetics', 'Men''s hair care · System maintenance', 'A two-step cleansing duo for refreshing a hair system and caring for the scalp beneath.', 2200000, '/images/product-mens-system-cleanser.webp', 'New', '[]'::jsonb, 12, 22),
+  ('77777777-8888-4777-8777-777777777777', 'mens-curl-defining-cream', 'Men''s Curl Defining Cream', 'cosmetics', 'Men''s hair care · Styling cream', 'A soft-hold cream that helps define waves and coils without a stiff feel.', 1150000, '/images/product-mens-curl-cream.webp', 'New', '[]'::jsonb, 20, 23),
+  ('88888888-9999-4888-8888-888888888888', 'mens-hair-beard-oil', 'Men''s Hair & Beard Oil', 'cosmetics', 'Men''s hair care · Grooming oil', 'A lightweight finishing oil for softer-feeling hair and a well-groomed beard.', 1350000, '/images/product-mens-grooming-oil.webp', 'New', '[]'::jsonb, 22, 24)
+on conflict (slug) do nothing;

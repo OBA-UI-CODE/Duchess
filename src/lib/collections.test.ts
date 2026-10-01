@@ -21,3 +21,12 @@ test("a collection returns only its listed products in display order", () => {
     "atlas-salt-pepper-system",
   ]);
 });
+
+test("men's collections each contain two complete rows of distinct products", () => {
+  for (const slug of ["mens-hair", "mens-hair-care"]) {
+    const collection = collections.find((item) => item.slug === slug);
+    assert.ok(collection);
+    assert.equal(collection.productSlugs.length, 6);
+    assert.equal(new Set(collection.productSlugs).size, 6);
+  }
+});
