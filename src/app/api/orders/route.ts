@@ -1,5 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
-import { MailgunResponseError, sendOrderEmail } from "@/lib/order-email";
+import { ResendResponseError, sendOrderEmail } from "@/lib/order-email";
 
 type CheckoutInput = {
   email?: unknown;
@@ -50,12 +50,13 @@ export async function POST(request: Request) {
         firstName: String(shipping.full_name).trim().split(/\s+/)[0],
       });
       emailSent = true;
-    } catch (mailError) {
-      // The order is valid even if Mailgun is unavailable or the sandbox rejects this address.
-      console.error("Order email failed", { orderNumber: data.order_number, attempt, reason: mailError instanceof Error ? mailError.message : "Unknown error" });
-      if (!(mailError instanceof MailgunResponseError) || (mailError.status !== 429 && mailError.status < 500)) break;
+    } catch (emailError) {
+      // The order is valid even if Resend is unavailable or rejects this address.
+      console.error("Order email failed", { orderNumber: data.order_number, attempt, reason: emailError instanceof Error ? emailError.message : "Unknown error" });
+      if (!(emailError instanceof ResendResponseError) || (emailError.status !== 429 && emailError.status < 500)) break;
     }
   }
 
   return Response.json({ orderNumber: data.order_number, emailSent }, { status: 201 });
 }
+

@@ -11,32 +11,50 @@ test("pending order email states that payment was not taken", () => {
   assert.doesNotMatch(message, /payment confirmed/i);
 });
 
-test("Mailgun request uses the server-side sending key and domain", async () => {
+test("Resend request uses the server-side API key and from address", async () => {
   const originalFetch = globalThis.fetch;
-  const originalKey = process.env.MAILGUN_API_KEY;
-  const originalDomain = process.env.MAILGUN_DOMAIN;
-  const originalUrl = process.env.MAILGUN_API_URL;
-  process.env.MAILGUN_API_KEY = "test-key";
-  process.env.MAILGUN_DOMAIN = "sandbox.example.mailgun.org";
-  process.env.MAILGUN_API_URL = "https://api.mailgun.net";
+  const originalKey = process.env.RESEND_API_KEY;
+  const originalFrom = process.env.RESEND_FROM;
+  process.env.RESEND_API_KEY = "re_test_key";
+  process.env.RESEND_FROM = "Duchess <orders@duchess.store>";
+
   let called = false;
+  let capturedUrl = "";
+  let capturedOptions: RequestInit | undefined = undefined;
+
   globalThis.fetch = async (input, init) => {
     called = true;
-    assert.equal(input, "https://api.mailgun.net/v3/sandbox.example.mailgun.org/messages");
-    assert.equal(init?.method, "POST");
-    assert.equal((init?.headers as Record<string, string>).Authorization, `Basic ${Buffer.from("api:test-key").toString("base64")}`);
-    const body = init?.body as FormData;
-    assert.equal(body.get("to"), "ada@example.com");
-    assert.match(String(body.get("text")), /Payment has not been taken/);
-    return new Response("{}", { status: 200 });
+    capturedUrl = String(input);
+    capturedOptions = init;
+    return new Response(JSON.stringify({ id: "mock-id" }), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
   };
+
   try {
     await sendOrderEmail("ada@example.com", { orderNumber: "DUC-123", totalKobo: 1250000, firstName: "Ada" });
     assert.equal(called, true);
+    assert.match(capturedUrl, /api\.resend\.com\/emails/);
+    assert.equal(capturedOptions?.method, "POST");
+
+    const getHeader = (headers: any, name: string) => {
+      if (!headers) return undefined;
+      if (typeof headers.get === "function") return headers.get(name);
+      return headers[name] || headers[name.toLowerCase()];
+    };
+
+    const authHeader = getHeader(capturedOptions?.headers, "Authorization");
+    assert.equal(authHeader, "Bearer re_test_key");
+
+    const body = JSON.parse(String(capturedOptions?.body));
+    assert.equal(body.to, "ada@example.com");
+    assert.equal(body.from, "Duchess <orders@duchess.store>");
+    assert.match(body.text, /Payment has not been taken/);
   } finally {
     globalThis.fetch = originalFetch;
-    if (originalKey === undefined) delete process.env.MAILGUN_API_KEY; else process.env.MAILGUN_API_KEY = originalKey;
-    if (originalDomain === undefined) delete process.env.MAILGUN_DOMAIN; else process.env.MAILGUN_DOMAIN = originalDomain;
-    if (originalUrl === undefined) delete process.env.MAILGUN_API_URL; else process.env.MAILGUN_API_URL = originalUrl;
+    if (originalKey === undefined) delete process.env.RESEND_API_KEY; else process.env.RESEND_API_KEY = originalKey;
+    if (originalFrom === undefined) delete process.env.RESEND_FROM; else process.env.RESEND_FROM = originalFrom;
   }
 });
+

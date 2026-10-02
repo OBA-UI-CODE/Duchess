@@ -1,14 +1,16 @@
+import { Resend } from "resend";
+
 export type OrderEmail = {
   orderNumber: string;
   totalKobo: number;
   firstName: string;
 };
 
-export class MailgunResponseError extends Error {
+export class ResendResponseError extends Error {
   readonly status: number;
 
   constructor(status: number) {
-    super(`Mailgun rejected the message (${status})`);
+    super(`Resend rejected the message (${status})`);
     this.status = status;
   }
 }
@@ -19,23 +21,18 @@ export function orderEmailText({ orderNumber, totalKobo, firstName }: OrderEmail
 }
 
 export async function sendOrderEmail(to: string, order: OrderEmail): Promise<void> {
-  const key = process.env.MAILGUN_API_KEY;
-  const domain = process.env.MAILGUN_DOMAIN;
-  const apiUrl = process.env.MAILGUN_API_URL;
-  if (!key || !domain || !apiUrl) throw new Error("Mailgun is not configured");
-  if (!/^https:\/\/api(?:\.eu)?\.mailgun\.net\/?$/.test(apiUrl)) throw new Error("Invalid Mailgun API URL");
+  const key = process.env.RESEND_API_KEY;
+  const from = process.env.RESEND_FROM;
+  if (!key || !from) throw new Error("Resend is not configured");
 
-  const body = new FormData();
-  body.set("from", `Duchess <postmaster@${domain}>`);
-  body.set("to", to);
-  body.set("subject", `We received your Duchess order ${order.orderNumber}`);
-  body.set("text", orderEmailText(order));
-
-  const response = await fetch(`${apiUrl.replace(/\/$/, "")}/v3/${encodeURIComponent(domain)}/messages`, {
-    method: "POST",
-    headers: { Authorization: `Basic ${Buffer.from(`api:${key}`).toString("base64")}` },
-    body,
-    signal: AbortSignal.timeout(10000),
+  const resend = new Resend(key);
+  const { error } = await resend.emails.send({
+    from,
+    to,
+    subject: `We received your Duchess order ${order.orderNumber}`,
+    text: orderEmailText(order),
   });
-  if (!response.ok) throw new MailgunResponseError(response.status);
+
+  if (error) throw new ResendResponseError((error as { statusCode?: number }).statusCode ?? 500);
 }
+
