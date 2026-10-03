@@ -438,8 +438,12 @@ footer a:hover { color: white; }
   .account-orders .order-status { grid-column: 1; width: fit-content; }
   .policy-page { padding: 56px 20px 80px; }
   .product-image { border-radius: 10px; }
-  .wishlist { width: 40px; height: 40px; top: 8px; right: 8px; }
-  .product-badge { top: 10px; left: 9px; padding: 6px 8px; }
+  .wishlist { width: 44px; height: 44px; top: 4px; right: 4px; background: transparent; }
+  .wishlist::before { position: absolute; inset: 5px; content: ""; border-radius: 50%; background: rgba(255,255,255,.92); box-shadow: 0 2px 10px rgba(36,16,47,.08); }
+  .wishlist svg { position: relative; z-index: 1; width: 16px; }
+  .wishlist.is-saved { background: transparent; }
+  .wishlist.is-saved::before { background: var(--purple-800); }
+  .product-badge { top: 9px; left: 8px; max-width: calc(100% - 58px); overflow: hidden; padding: 5px 7px; font-size: 9px; line-height: 1.2; text-overflow: ellipsis; white-space: nowrap; }
   .product-copy { padding-top: 12px; }
   .product-copy h3 { min-height: 42px; font-size: 14px; }
   .product-row p { font-size: 14px; }
