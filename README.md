@@ -13,6 +13,6 @@ implementation.
 - [Design system](docs/DESIGN_SYSTEM.md)
 - [AI agent instructions](AGENTS.md)
 
-Planned integrations include Supabase, Google authentication, Paystack, and
-Mailgun. Primary design references are 1440px desktop, 898px tablet, and 393px
-mobile.
+The storefront uses Supabase and Google authentication, with Resend handling
+transactional order email. Paystack remains the planned payment provider.
+Primary design references are 1440px desktop, 898px tablet, and 393px mobile.

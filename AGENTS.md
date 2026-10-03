@@ -26,10 +26,10 @@ ornamental.
 - Use Supabase for Postgres, authentication, Google OAuth, and product media.
 - Use Paystack for payments. Prices and order totals must be calculated and
   verified on the server; never trust totals submitted by the browser.
-- Use Mailgun for transactional messages. Email failure must be recorded and
+- Use Resend for transactional messages. Email failure must be recorded and
   retried without rolling back an otherwise valid paid order.
 - Keep secrets server-only. Never expose the Supabase service-role key,
-  Paystack secret key, Mailgun API key, or webhook secrets to client bundles.
+  Paystack secret key, Resend API key, or webhook secrets to client bundles.
 
 ## Data and security rules
 
