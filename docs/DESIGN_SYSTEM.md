@@ -23,7 +23,7 @@ The design reference frames are:
 
 | Mode | Reference width | Working range | Content behavior |
 |---|---:|---:|---|
-| Mobile | 393px | 0–599px | One column; 20px gutters |
+| Mobile | 393px | 0–599px | One column; 18px gutters (15px at 340px and below) |
 | Tablet | 898px | 600–1099px | 8-column grid; 32px gutters |
 | Desktop | 1440px | 1100px+ | 12-column grid; 64px gutters |
 
@@ -36,7 +36,7 @@ CSS breakpoint values. Content is capped at `1312px` on desktop
 
 | Mode | Columns | Gutter | Gap |
 |---|---:|---:|---:|
-| Mobile | 4 | 20px | 12px |
+| Mobile | 4 | 18px | 12px |
 | Tablet | 8 | 32px | 20px |
 | Desktop | 12 | 64px | 24px |
 
@@ -89,13 +89,13 @@ Use variable fonts when possible and preload only the weights actually used.
 
 | Token | Mobile | Tablet | Desktop | Family / weight | Use |
 |---|---|---|---|---|---|
-| `display-xl` | 44/48 | 64/68 | 80/84 | Sora 600 | Split hero headline |
-| `display-lg` | 36/42 | 48/54 | 64/70 | Sora 600 | Campaign headline |
-| `heading-1` | 32/38 | 40/48 | 48/56 | Sora 600 | Page title |
-| `heading-2` | 28/34 | 32/40 | 40/48 | Sora 600 | Major section |
-| `heading-3` | 24/30 | 28/36 | 32/40 | Sora 600 | Subsection |
+| `display-xl` | 35/38 | 64/68 | 80/84 | Sora 600 | Split hero headline |
+| `display-lg` | 34/36 | 48/54 | 64/70 | Sora 600 | Campaign headline |
+| `heading-1` | 30–32/34 | 40/48 | 48/56 | Sora 600 | Page title |
+| `heading-2` | 26/30 | 32/40 | 40/48 | Sora 600 | Major section |
+| `heading-3` | 22–25/29 | 28/36 | 32/40 | Sora 600 | Subsection |
 | `heading-4` | 20/26 | 22/28 | 24/32 | Sora 600 | Card/modal title |
-| `body-lg` | 18/28 | 18/28 | 18/28 | DM Sans 400 | Introductory copy |
+| `body-lg` | 16/24 | 18/28 | 18/28 | DM Sans 400 | Introductory copy |
 | `body-md` | 16/24 | 16/24 | 16/24 | DM Sans 400 | Default body/input |
 | `body-sm` | 14/20 | 14/20 | 14/20 | DM Sans 400 | Metadata/support |
 | `label-lg` | 16/20 | 16/20 | 16/20 | DM Sans 600 | Buttons/navigation |
@@ -119,7 +119,7 @@ Use a 4px base with a deliberately small semantic scale:
 | `space-2` | 8px | Label-to-control, tight stack |
 | `space-3` | 12px | Compact card content |
 | `space-4` | 16px | Default component padding |
-| `space-5` | 20px | Mobile page gutter |
+| `space-5` | 18px | Mobile page gutter |
 | `space-6` | 24px | Card padding/grid gap |
 | `space-8` | 32px | Component groups |
 | `space-10` | 40px | Small section spacing |
@@ -193,7 +193,9 @@ keep an accessible loading label.
 
 ### Mobile
 
-- 64px top navigation with menu, centred Duchess mark, search, and cart.
+- 28px announcement bar and 62px top navigation with a centred Duchess mark.
+- The header uses dedicated 44px menu, search, and cart targets so icons never
+  overlap the wordmark at 393px or 320px.
 - Account and wishlist live in the drawer; cart remains directly available.
 - Drawer traps focus, closes via close button, backdrop, Escape, and navigation.
 
@@ -207,6 +209,8 @@ keep an accessible loading label.
 - Sale price is primary; previous price uses strikethrough plus a textual sale
   cue. Never indicate discount through colour alone.
 - Wishlist target is at least 44px and does not obstruct product imagery.
+- On mobile the visible wishlist disc is 32px inside its 44px target. Badges use
+  compact type and reserve enough image space so they never collide.
 - Show an “In cart” state after addition. Quick-add only when no selection is
   required; otherwise use “Choose options”.
 - Skeletons match the card geometry to prevent layout shift.
