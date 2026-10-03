@@ -142,7 +142,9 @@ any new reusable value as a token.
 - Default border: 1px `neutral-200`
 - Focus ring: 2px white separation + 3px `purple-700`
 - Shadows are used for overlays and floating navigation, not every card.
-- Product cards are borderless by default; image and spacing define them.
+- Product cards are borderless by default on tablet and desktop. Mobile cards
+  use one restrained bordered surface around the image, metadata, title, price,
+  and action so every collection has the same rhythm.
 
 ## 7. Buttons
 
@@ -193,7 +195,8 @@ keep an accessible loading label.
 
 ### Mobile
 
-- 28px announcement bar and 62px top navigation with a centred Duchess mark.
+- 24px announcement bar with 8px text and a 62px top navigation with a centred
+  Duchess mark.
 - The header uses dedicated 44px menu, search, and cart targets so icons never
   overlap the wordmark at 393px or 320px.
 - Account and wishlist live in the drawer; cart remains directly available.
@@ -209,8 +212,10 @@ keep an accessible loading label.
 - Sale price is primary; previous price uses strikethrough plus a textual sale
   cue. Never indicate discount through colour alone.
 - Wishlist target is at least 44px and does not obstruct product imagery.
-- On mobile the visible wishlist disc is 32px inside its 44px target. Badges use
+- On mobile the visible wishlist disc is 28px inside a 40px control. Badges use
   compact type and reserve enough image space so they never collide.
+- Quick-add uses a compact 28px rounded-square visual rather than an oversized
+  circular button.
 - Show an “In cart” state after addition. Quick-add only when no selection is
   required; otherwise use “Choose options”.
 - Skeletons match the card geometry to prevent layout shift.
