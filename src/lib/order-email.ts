@@ -26,12 +26,15 @@ export async function sendOrderEmail(to: string, order: OrderEmail): Promise<voi
   if (!key || !from) throw new Error("Resend is not configured");
 
   const resend = new Resend(key);
-  const { error } = await resend.emails.send({
-    from,
-    to,
-    subject: `We received your Duchess order ${order.orderNumber}`,
-    text: orderEmailText(order),
-  });
+  const { error } = await resend.emails.send(
+    {
+      from,
+      to,
+      subject: `We received your Duchess order ${order.orderNumber}`,
+      text: orderEmailText(order),
+    },
+    { idempotencyKey: `order-received/${order.orderNumber}` },
+  );
 
   if (error) throw new ResendResponseError((error as { statusCode?: number }).statusCode ?? 500);
 }

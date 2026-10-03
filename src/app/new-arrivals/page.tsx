@@ -5,7 +5,6 @@ import { Header } from "@/components/Header";
 import { ProductCard } from "@/components/ProductCard";
 import { getProducts } from "@/lib/products";
 
-export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "New arrivals",
   description: "Meet the latest additions to the Duchess hair and beauty collection.",

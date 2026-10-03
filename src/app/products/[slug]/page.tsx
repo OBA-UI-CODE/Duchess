@@ -5,9 +5,11 @@ import { notFound } from "next/navigation";
 import { ChevronLeft, PackageCheck, ShieldCheck } from "lucide-react";
 import { Header } from "@/components/Header";
 import { ProductPurchase } from "@/components/ProductPurchase";
-import { formatNaira, getProduct } from "@/lib/products";
+import { formatNaira, getProduct, sampleProducts } from "@/lib/products";
 
-export const dynamic = "force-dynamic";
+export function generateStaticParams() {
+  return sampleProducts.map((product) => ({ slug: product.slug }));
+}
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const product = await getProduct((await params).slug);
   return product ? { title: product.name, description: product.description } : { title: "Product not found" };

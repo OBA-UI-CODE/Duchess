@@ -20,12 +20,12 @@ test("Resend request uses the server-side API key and from address", async () =>
 
   let called = false;
   let capturedUrl = "";
-  let capturedOptions: RequestInit | undefined = undefined;
+  let capturedOptions: RequestInit = {};
 
   globalThis.fetch = async (input, init) => {
     called = true;
     capturedUrl = String(input);
-    capturedOptions = init;
+    capturedOptions = init ?? {};
     return new Response(JSON.stringify({ id: "mock-id" }), {
       status: 200,
       headers: { "Content-Type": "application/json" },
@@ -46,6 +46,7 @@ test("Resend request uses the server-side API key and from address", async () =>
 
     const authHeader = getHeader(capturedOptions?.headers, "Authorization");
     assert.equal(authHeader, "Bearer re_test_key");
+    assert.equal(getHeader(capturedOptions?.headers, "Idempotency-Key"), "order-received/DUC-123");
 
     const body = JSON.parse(String(capturedOptions?.body));
     assert.equal(body.to, "ada@example.com");

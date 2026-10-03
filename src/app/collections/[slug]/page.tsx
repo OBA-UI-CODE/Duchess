@@ -9,8 +9,6 @@ import { collections, getCollectionProducts, getDepartmentCollections } from "@/
 import { getProducts } from "@/lib/products";
 import type { Department } from "@/lib/product-types";
 
-export const dynamic = "force-dynamic";
-
 export function generateStaticParams() {
   return ["hair", "cosmetics", ...collections.map((collection) => collection.slug)].map((slug) => ({ slug }));
 }

@@ -72,7 +72,7 @@ export async function StoreLanding({ department }: { department: Department }) {
         <Link className="landing-more-link" href={`/collections/${department}`}>View all {department === "hair" ? "hair" : "care & cosmetics"} products <ArrowRight aria-hidden="true" /></Link>
       </section>
       <section className="care-story" id="story">
-        <div className="care-art story-photo"><Image src={department === "hair" ? "/images/story-hair-portrait.jpg" : "/images/story-cosmetics-care.jpg"} alt={department === "hair" ? "Woman with natural curly hair smiling" : "Woman caring for her hair during a self-care routine"} fill loading="eager" sizes="(max-width: 599px) 100vw, (max-width: 1099px) 50vw, 55vw" /></div>
+        <div className="care-art story-photo"><Image src={department === "hair" ? "/images/story-hair-portrait.jpg" : "/images/story-cosmetics-care.jpg"} alt={department === "hair" ? "Woman with natural curly hair smiling" : "Woman caring for her hair during a self-care routine"} fill sizes="(max-width: 599px) calc(100vw - 40px), (max-width: 1099px) 50vw, 55vw" /></div>
         <div className="care-copy"><p className="eyebrow purple">Duchess guidance</p><h2>{page.storyTitle}</h2><p>{page.storyBody}</p><Link className="text-link" href="/journal">Explore the journal <ArrowRight /></Link></div>
       </section>
       <section className="newsletter">

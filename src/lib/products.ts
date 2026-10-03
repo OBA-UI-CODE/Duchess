@@ -1,4 +1,3 @@
-import { createClient } from "@/lib/supabase/server";
 import type { Department, Product } from "@/lib/product-types";
 export type { Department, Product } from "@/lib/product-types";
 export { formatNaira } from "@/lib/product-types";
@@ -36,11 +35,24 @@ function mapRow(row: Record<string, unknown>): Product {
 
 export async function getProducts(department?: Department) {
   try {
-    const supabase = await createClient();
-    let query = supabase.from("products").select("id,slug,name,department,category,description,price_kobo,image_url,badge,options,stock_quantity").eq("is_active",true).order("sort_order");
-    if (department) query = query.eq("department",department);
-    const { data, error } = await query;
-    if (!error && data?.length) return data.map((row) => mapRow(row));
+    const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+    if (url && key) {
+      const query = new URLSearchParams({
+        select: "id,slug,name,department,category,description,price_kobo,image_url,badge,options,stock_quantity",
+        is_active: "eq.true",
+        order: "sort_order.asc",
+      });
+      if (department) query.set("department", `eq.${department}`);
+      const response = await fetch(`${url}/rest/v1/products?${query}`, {
+        headers: { apikey: key, Authorization: `Bearer ${key}` },
+        next: { revalidate: 300, tags: ["products"] },
+      });
+      if (response.ok) {
+        const data = await response.json() as Record<string, unknown>[];
+        if (data.length) return data.map((row) => mapRow(row));
+      }
+    }
   } catch { /* Migration may not be applied yet; retain a complete preview catalogue. */ }
   return department ? sampleProducts.filter((product) => product.department === department) : sampleProducts;
 }
