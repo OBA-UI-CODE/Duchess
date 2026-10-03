@@ -387,13 +387,24 @@ footer a:hover { color: white; }
   .product-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 28px 12px; }
   .product-grid .product-card:last-child { display: block; }
   .catalogue-page, .commerce-page, .checkout-page { padding: 56px 20px 80px; }
+  .catalogue-page > h1, .page-intro h1, .checkout-form h1 { font-size: 34px; line-height: 1.06; }
   .catalogue-tools { align-items: stretch; flex-direction: column; margin-top: 34px; }
   .filter-tabs { overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
   .filter-tabs button { white-space: nowrap; }
   .product-detail { display: block; }
-  .detail-image { min-height: 490px; }
-  .detail-copy { padding: 42px 20px 72px; }
-  .back-link { margin-bottom: 36px; }
+  .detail-image { min-height: 0; height: min(118vw, 470px); }
+  .detail-copy { max-width: none; padding: 32px 20px 56px; }
+  .back-link { margin-bottom: 30px; font-size: 14px; }
+  .product-detail h1 { max-width: 350px; font-size: 36px; line-height: 1.02; letter-spacing: -.055em; }
+  .detail-copy > .eyebrow { margin-bottom: 10px; font-size: 10px; line-height: 1.35; }
+  .detail-price { margin-top: 18px; font-size: 22px; }
+  .detail-description { margin: 22px 0 28px; font-size: 15px; line-height: 1.55; }
+  .purchase-panel legend { margin-bottom: 10px; font-size: 12px; }
+  .option-list { gap: 8px; }
+  .option-list button { min-height: 44px; padding-inline: 15px; font-size: 14px; }
+  .stock-note { margin: 16px 0; font-size: 13px; }
+  .purchase-panel .primary-action, .purchase-panel .secondary-action { min-height: 50px; font-size: 15px; }
+  .purchase-panel .primary-action svg, .purchase-panel .secondary-action svg { width: 18px; }
   .detail-benefits { align-items: flex-start; flex-direction: column; gap: 12px; }
   .cart-layout, .checkout-page { display: block; }
   .cart-item { grid-template-columns: 96px 1fr; gap: 16px; }
@@ -433,10 +444,10 @@ footer a:hover { color: white; }
   .product-copy h3 { min-height: 42px; font-size: 14px; }
   .product-row p { font-size: 14px; }
   .product-row button { width: 38px; height: 38px; }
-  .care-story { margin: 0 20px 80px; display: flex; flex-direction: column; border-radius: 18px; }
-  .care-art { min-height: 400px; }
-  .care-copy { padding: 38px 24px 44px; }
-  .care-copy > p:not(.eyebrow) { font-size: 15px; margin-block: 20px 28px; }
+  .care-story { min-height: 0; margin: 0 20px 64px; display: flex; flex-direction: column; border-radius: 16px; }
+  .care-art { min-height: 0; height: 300px; }
+  .care-copy { padding: 30px 20px 34px; }
+  .care-copy > p:not(.eyebrow) { font-size: 14px; line-height: 1.55; margin-block: 16px 24px; }
   .newsletter { padding: 72px 20px; }
   .newsletter h2 { font-size: 30px; line-height: 1.2; }
   .newsletter form { display: block; padding: 0; background: transparent; }
@@ -453,6 +464,9 @@ footer a:hover { color: white; }
   .header-actions { width: 84px; }
   .search-button, .bag-button { min-width: 40px; }
   .department-hero-copy h1 { font-size: 30px; }
+  .product-detail h1 { font-size: 32px; }
+  .detail-copy { padding-inline: 16px; }
+  .care-art { height: 260px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -547,14 +561,14 @@ footer a:hover { color: white; }
   .collection-intro { margin: 40px 0 28px; }
   .collection-intro h1 { max-width: 320px; font-size: 32px; line-height: 1.08; }
   .collection-tabs { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 8px; margin-bottom: 28px; scrollbar-width: thin; }
-  .collection-tabs a { flex: none; }
+  .collection-tabs a { flex: none; min-height: 44px; padding: 9px 15px; font-size: 12px; }
   .collection-categories, .landing-collection-grid { grid-template-columns: 1fr; gap: 14px; }
   .collection-tile { display: grid; grid-template-columns: 42% 58%; }
   .collection-tile-image { height: 100%; aspect-ratio: auto; }
   .collection-tile-copy { padding: 16px; }
   .collection-tile-copy strong, .landing-collection-label strong { font-size: 17px; }
   .collection-tile-copy > span:not(.collection-tile-action) { font-size: 12px; }
-  .collection-products { margin-top: 64px; }
+  .collection-products { margin-top: 52px; }
   .landing-collection-card { display: block; min-height: 300px; aspect-ratio: auto; }
   .landing-collection-image { height: 100%; aspect-ratio: auto; }
   .landing-collection-image img { object-position: center 28%; }
