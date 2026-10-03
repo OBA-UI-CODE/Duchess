@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { LoaderCircle } from "lucide-react";
+import { Eye, EyeOff, LoaderCircle } from "lucide-react";
 import { FormEvent, useState } from "react";
 import { createClient, isSupabaseConfigured } from "@/lib/supabase/client";
 
@@ -11,6 +11,7 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const isLogin = mode === "login";
 
   async function continueWithGoogle() {
@@ -51,7 +52,19 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
       <div className="auth-divider"><span>or continue with email</span></div>
       <form className="auth-form" onSubmit={submit}>
         <label htmlFor="email">Email address</label><input id="email" name="email" type="email" autoComplete="email" required placeholder="you@example.com" />
-        <label htmlFor="password">Password</label><input id="password" name="password" type="password" autoComplete={isLogin ? "current-password" : "new-password"} minLength={8} required placeholder="At least 8 characters" />
+        <label htmlFor="password">Password</label>
+        <div className="password-field">
+          <input id="password" name="password" type={showPassword ? "text" : "password"} autoComplete={isLogin ? "current-password" : "new-password"} minLength={8} required placeholder="At least 8 characters" />
+          <button
+            type="button"
+            className="password-toggle"
+            onClick={() => setShowPassword((visible) => !visible)}
+            aria-label={showPassword ? "Hide password" : "Show password"}
+            aria-pressed={showPassword}
+          >
+            {showPassword ? <EyeOff aria-hidden="true" /> : <Eye aria-hidden="true" />}
+          </button>
+        </div>
         {isLogin && <Link className="forgot-link" href="/forgot-password">Forgot password?</Link>}
         <button className="auth-submit" disabled={loading}>{loading && <LoaderCircle className="spinner" />}{isLogin ? "Sign in" : "Create account"}</button>
       </form>
