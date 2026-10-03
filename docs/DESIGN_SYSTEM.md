@@ -142,9 +142,8 @@ any new reusable value as a token.
 - Default border: 1px `neutral-200`
 - Focus ring: 2px white separation + 3px `purple-700`
 - Shadows are used for overlays and floating navigation, not every card.
-- Product cards are borderless by default on tablet and desktop. Mobile cards
-  use one restrained bordered surface around the image, metadata, title, price,
-  and action so every collection has the same rhythm.
+- Product cards are borderless. Photography, consistent content alignment, and
+  whitespace define each card at every breakpoint.
 
 ## 7. Buttons
 
