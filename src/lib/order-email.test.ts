@@ -38,15 +38,10 @@ test("Resend request uses the server-side API key and from address", async () =>
     assert.match(capturedUrl, /api\.resend\.com\/emails/);
     assert.equal(capturedOptions?.method, "POST");
 
-    const getHeader = (headers: any, name: string) => {
-      if (!headers) return undefined;
-      if (typeof headers.get === "function") return headers.get(name);
-      return headers[name] || headers[name.toLowerCase()];
-    };
-
-    const authHeader = getHeader(capturedOptions?.headers, "Authorization");
+    const headers = new Headers(capturedOptions.headers);
+    const authHeader = headers.get("Authorization");
     assert.equal(authHeader, "Bearer re_test_key");
-    assert.equal(getHeader(capturedOptions?.headers, "Idempotency-Key"), "order-received/DUC-123");
+    assert.equal(headers.get("Idempotency-Key"), "order-received/DUC-123");
 
     const body = JSON.parse(String(capturedOptions?.body));
     assert.equal(body.to, "ada@example.com");

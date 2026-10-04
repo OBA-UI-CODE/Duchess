@@ -57,6 +57,7 @@ export function CommerceProvider({ children }: { children: React.ReactNode }) {
   const [owner, setOwner] = useState<string | null>(null);
   const ownerRef = useRef<string | null>(null);
   const loadId = useRef(0);
+  const applyingRemoteCart = useRef(false);
   const [ready, setReady] = useState(false);
   const client = useMemo(() => isSupabaseConfigured() ? createClient() : null, []);
 
@@ -147,6 +148,10 @@ export function CommerceProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (!ready || !client || !owner || owner === "guest" || ownerRef.current !== owner) return;
+    if (applyingRemoteCart.current) {
+      applyingRemoteCart.current = false;
+      return;
+    }
     const timer = window.setTimeout(async () => {
       if (ownerRef.current !== owner) return;
       const { data: { user } } = await client.auth.getUser();
@@ -180,6 +185,42 @@ export function CommerceProvider({ children }: { children: React.ReactNode }) {
     }, 350);
     return () => window.clearTimeout(timer);
   }, [client, owner, ready, wishlist]);
+
+  useEffect(() => {
+    if (!ready || !client || !owner || owner === "guest") return;
+    let active = true;
+    const refreshCart = async () => {
+      const { data, error } = await client
+        .from("cart_items")
+        .select("quantity,selected_option,products(*)")
+        .eq("user_id", owner);
+      if (!active || error || ownerRef.current !== owner) return;
+      applyingRemoteCart.current = true;
+      setCart((data ?? []).flatMap((row) => {
+        const product = row.products as unknown as Record<string, unknown> | null;
+        return product ? [{ product: mapProduct(product), option: row.selected_option, quantity: row.quantity }] : [];
+      }));
+    };
+    const channel = client
+      .channel(`web-cart-${owner}`)
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "cart_items", filter: `user_id=eq.${owner}` },
+        () => { void refreshCart(); },
+      )
+      .subscribe();
+    const interval = window.setInterval(() => void refreshCart(), 4000);
+    const refreshOnFocus = () => void refreshCart();
+    window.addEventListener("focus", refreshOnFocus);
+    document.addEventListener("visibilitychange", refreshOnFocus);
+    return () => {
+      active = false;
+      window.clearInterval(interval);
+      window.removeEventListener("focus", refreshOnFocus);
+      document.removeEventListener("visibilitychange", refreshOnFocus);
+      void client.removeChannel(channel);
+    };
+  }, [client, owner, ready]);
 
   const value = useMemo<CommerceContextValue>(() => ({
     cart, wishlist,
